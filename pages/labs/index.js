@@ -1,11 +1,20 @@
 import Head from 'next/head';
-import Link from 'next/link';
-import React from 'react';
-import Image from 'next/image';
+import React, { useRef, useEffect } from 'react';
 import BlogCard from '../../components/BlogCard';
+import { queryData } from '../../utils/Sanity';
+import { useRouter } from 'next/router';
+import Pagination from '../../components/Pagination';
+import { AiOutlineArrowUp } from 'react-icons/ai';
+import ScrollBtn from '../../components/ScrollBtn';
 
+const postPerPage = 10;
 
-export default function Labs({ posts, tags }) {
+export default function Labs({ posts }) {
+    const router = useRouter();
+    const page = router.query.page || 1;
+
+    const postsSlice = posts.slice(((page - 1) * postPerPage), page * postPerPage);
+
     return (
         <>
             <Head>
@@ -14,47 +23,59 @@ export default function Labs({ posts, tags }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <main className='mt-[80px] xl:px-[32px] lg:px-[26px] px-[10px]'>
+
+            <ScrollBtn />
+            <main className='mt-[80px] xl:px-[32px] lg:px-[26px] px-[10px] mb-8'>
                 <header>
-                    <h1 className='md:text-[48px] text-[39px] font-[700] text-center'>
+                    <h1 className='font-title md:text-[55px] text-[40px] font-[900] text-center'>
                         LABS
                     </h1>
-                    <p className='md:text-[16px] text-[13px] text-[#b2becd] text-center mt-[-10px]'>single dose video lessons and tutorials</p>
+                    <p className='font-code md:text-[25px] text-[20px] text-[#b2becd] text-center mt-[-10px]'>single dose video lessons and tutorials</p>
                 </header>
                 <div className='lg:mt-[48px] mt-[39px] mb-[76px] mx-auto h-[4px] w-[96px] rounded-md bg-gradient-to-r from-gray-700 to-gray-500'></div>
 
                 <div>
                     <ul className='grid grid-cols-1 sm:grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 gap-y-[55px]'>
-                        {posts.map(post =>
+                        {postsSlice.map(post =>
                             <li className="blogCard rounded hover:scale-105 ease-in duration-300 xl:w-full max-w-[400px]" key={post._id}>
-                                <BlogCard post={post} tags={tags} />
+                                <BlogCard post={post} />
                             </li>
                         )}
                     </ul>
 
                 </div>
             </main>
+
+            <Pagination numPage={Math.ceil(posts.length / postPerPage)} numActive={page} />
         </>
     )
 }
 
-export async function getStaticProps() {
-    const urlPost = 'https://6730jc99.api.sanity.io/v1/data/query/production?query=*[_type=="post"]'
+export async function getStaticProps(context) {
+    // const { page } = router.query;
+    // console.log(router.query);
+    // const urlPost = 'https://6730jc99.api.sanity.io/v1/data/query/production?query=*[_type=="post"]'
 
-    const resPost = await fetch(urlPost);
-    const resultPost = await resPost.json();
-    const posts = resultPost.result;
+    // const resPost = await fetch(urlPost);
+    // const resultPost = await resPost.json();
+    // const post = resultPost.result;
 
-    const urlTag = 'https://6730jc99.api.sanity.io/v1/data/query/production?query=*[_type=="tag"]'
+    // const urlTag = 'https://6730jc99.api.sanity.io/v1/data/query/production?query=*[_type=="tag"]'
 
-    const resTag = await fetch(urlTag);
-    const resultTag = await resTag.json();
-    const tags = resultTag.result;
+    // const resTag = await fetch(urlTag);
+    // const resultTag = await resTag.json();
+    // const tags = resultTag.result;
+
+    const query = `*[_type == "post"]{
+        ...,
+        tag[]->} | order(_createdAt desc)`
+
+    const posts = await queryData(query);
 
     return {
         props: {
             posts,
-            tags
+            page: 1
         },
     }
 }

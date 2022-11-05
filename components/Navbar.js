@@ -12,10 +12,10 @@ export default function Navbar() {
             </Link>
             <ul className='text-[#dbe1e8] nav flex gap-3 md:gap-7 font-[700] md:text-[18px] text-[14px] justify-center items-center'>
                 <li className='hover:scale-110 hover:drop-shadow-[0_0_9px_rgba(34,197,94,0.9)] hover:translate-y-0.5 ease-in duration-200'>
-                    <Link className=' text-green-500 md:px-2 md:py-1 px-1 py-1  border-green-400 sm:border rounded-md' href="/pro">PRO</Link>
+                    <Link className='font-title text-green-500 md:px-2 px-1 py-0.5 border-green-400 sm:border rounded-md' href="/">PRO</Link>
                 </li>
                 <li className='hover:text-[#fff] hover:scale-105 ease-in duration-100'>
-                    <Link href='/labs'>
+                    <Link href={{ pathname: '/labs' }}>
                         labs
                     </Link>
                 </li>
@@ -24,7 +24,7 @@ export default function Navbar() {
                         courses
                     </Link>
                 </li>
-                <li className='md:hover:border-[#A855F7] hover:bg-opacity-20 md:bg-white md:bg-opacity-10 md:hover:border hover:drop-shadow-[0_0_7px_rgba(168,85,247,0.5)] border border-[#929292] transition-all'>
+                <li className='md:hover:border-[#A855F7] hover:bg-opacity-20 md:bg-white md:bg-opacity-10 md:hover:border hover:drop-shadow-[0_0_7px_rgba(168,85,247,0.5)] border border-transparent md:border-[#929292] transition-all'>
                     <div className="cursor-pointer relative boxSearch lg:w-[190px] lg:p-[8px] md:w-[150px]
                     md:p-[6px] flex items-center ">
                         <IoMdSearch className='mx-[5px] md:text-[25px]' fontSize={20} />
