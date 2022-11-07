@@ -1,5 +1,5 @@
 import React from 'react';
-import LayoutContent from '../../components/layouts/LayoutContent';
+import LayoutContent from '../../components/Layouts/LayoutContent';
 import BlockContent from '@sanity/block-content-to-react';
 import getYouTubeId from 'get-youtube-id';
 import YouTube from 'react-youtube';
