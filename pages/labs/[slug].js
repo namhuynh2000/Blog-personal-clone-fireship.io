@@ -71,9 +71,9 @@ export default function Slug({ post }) {
                                 })
                             }
                         </div>
-                        <Link href={post.link ? post.link : '#'} target="_blank" className='bg-[#22252a] py-2 px-4 md:text-[14px] hover:bg-[#191C20] text-[11px] font-[500] ml-4 cursor-pointer inline'>
+                        <a href={post.link ? post.link : '#'} target="_blank" className='bg-[#22252a] py-2 px-4 md:text-[14px] hover:bg-[#191C20] text-[11px] font-[500] ml-4 cursor-pointer inline'>
                             SOURCE CODE
-                        </Link>
+                        </a>
                     </div>
                 </div>
                 <article className="prose">

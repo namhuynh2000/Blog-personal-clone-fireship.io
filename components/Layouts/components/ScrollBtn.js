@@ -16,7 +16,7 @@ export default function ScrollBtn() {
                 scrollBtn.current.classList.add('hideScrollBtn');
             }
         }
-    }, [])
+    }, [scrollBtn.current])
 
     useEffect(() => {
         window.addEventListener('scroll', scrollStatusFunc);
@@ -24,7 +24,7 @@ export default function ScrollBtn() {
         return () => {
             window.removeEventListener('scroll', scrollStatusFunc);
         }
-    }, []);
+    }, [scrollStatusFunc]);
 
 
     return (
