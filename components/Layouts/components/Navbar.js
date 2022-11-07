@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
-import SearchBar from './SearchBar';
+import SearchBar from '../../SearchBar';
 
 export default function Navbar() {
     return (

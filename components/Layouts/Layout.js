@@ -1,12 +1,16 @@
 import React from 'react'
-import Navbar from './Navbar'
+import ScrollBtn from './components/ScrollBtn'
+import Footer from './components/Footer'
+import Navbar from './components/Navbar'
 
 export default function Layout({ children }) {
     return (
         <>
             <Navbar />
+            <ScrollBtn />
             {children}
             {/* <div className='mb-[30px]'></div> */}
+            <Footer />
         </>
     )
 }

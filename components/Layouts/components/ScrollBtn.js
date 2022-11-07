@@ -32,6 +32,8 @@ export default function ScrollBtn() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             scrollBtn.current.classList.remove('showScrollBtn');
             scrollBtn.current.classList.add('hideScrollBtn');
-        }} className='hideScrollBtn cursor-pointer flex justify-center items-center fixed rounded-full w-[40px] h-[40px] ease-in duration-100 right-5 z-10 bg-[#0f121a]'><AiOutlineArrowUp color='#6c7983' fontSize={25} /></div>
+        }} className='hideScrollBtn cursor-pointer flex justify-center items-center fixed rounded-full w-[40px] h-[40px] ease-in duration-100 right-5 z-10 bg-[#0f121a]'>
+            <AiOutlineArrowUp className='hover:text-[#F97316] text-[#6c7983]' fontSize={25} />
+        </div>
     )
 }

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
-import { urlFor } from '../utils/Sanity';
+import { urlFor } from '../libs/library';
 
 
 export default function BlogCard({ post }) {
@@ -11,7 +11,6 @@ export default function BlogCard({ post }) {
         <>
             <Link href={`/labs/${post.slug.current}`}>
                 <article className='rounded-[0.75rem] w-[312px] xl:w-full overflow-hidden inline-block bg-[#2a2e35]'>
-                    {/* <img className='w-full h-[175px] object-cover' src={poster ? urlFor(poster)?.url() : '/noimage.png'} alt={poster?.caption} /> */}
                     <Image
                         className='w-full h-[175px] object-cover'
                         src={poster ? urlFor(poster)?.url() : '/noimage.png'}

@@ -1,3 +1,0 @@
-1. Genaration slug duy nhất
-2. Cách tạo hiệu ứng loading khi navigate
-3. 

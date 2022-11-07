@@ -1,12 +1,11 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { IoMdSearch } from 'react-icons/io';
-import { InstantSearch, Hits, Highlight, Configure, connectSearchBox } from 'react-instantsearch-dom';
-import { client } from '../utils/Algolia';
+import { InstantSearch, Hits, Highlight, Configure, connectSearchBox, connectStateResults } from 'react-instantsearch-dom';
+import { clientAlgolia } from '../utils/Algolia';
 import Link from 'next/link'
 
 export default function SearchBar() {
     const searchFull = useRef();
-    // const [showHit, setShowHit] = useState(false);
 
     useEffect(() => {
         const main = document.querySelector('#__next');
@@ -15,6 +14,15 @@ export default function SearchBar() {
             main.removeChild(searchFull.current)
         }
     }, [])
+
+    useEffect(() => {
+        document.addEventListener('keydown', (e) => {
+            if (e.key == '/') {
+                searchFull.current.classList.remove('hidden')
+            }
+        })
+    }, [])
+
 
     function removeSearchFull(e) {
         if (e.target === e.currentTarget) {
@@ -43,14 +51,11 @@ export default function SearchBar() {
     const SearchBox = ({ currentRefinement, refine, placeholder }) => (
         <form noValidate action="" role="search">
             <input
-                className='block m-auto w-full text-[16px] bg-[#12181b80] outline-none px-3 pt-3 pb-2 border-b-4 border-b-[#a855f7]'
+                className='block m-auto w-full text-[16px] bg-[#12181b80] outline-none px-3 pt-3 pb-2 border-b-4 border-b-[#a855f7] mb-4'
                 type="search"
-                placeholder={placeholder}
                 value={currentRefinement}
-                onChange={event => {
-                    // if (event.currentTarget.value != '')
-                    //     setShowHit(true);
-                    // else setShowHit(false)
+                placeholder={placeholder}
+                onChange={(event) => {
                     refine(event.currentTarget.value)
                 }}
             />
@@ -59,19 +64,31 @@ export default function SearchBar() {
 
     const CustomSearchBox = connectSearchBox(SearchBox);
 
+    const Results = connectStateResults(({ searchState, children }) =>
+        searchState && searchState.query ? (
+            <>
+                {children}
+            </>
+        ) : (
+            <div className='text-[#b2becd] md:text-[14px] text-[11px] text-center'>No results yet</div>
+        )
+    );
+
+
     return (
         <>
             <section onClick={removeSearchFull} ref={searchFull} className='w-full h-full hidden top-0 bg-[#000]/[0.8] z-20 pt-[80px] fixed'>
-                <div className='mx-auto md:w-[60%] sm:w-[80%] w-[100%] bg-[#2a2e35] min-h-[300px] p-[30px] rounded-md'>
-                    <InstantSearch searchClient={client} indexName="blog">
+                <div className='mx-auto md:w-[60%] sm:w-[80%] w-[100%] bg-[#2a2e35] min-h-[400px] p-[50px] px-[30px] rounded-md'>
+                    <InstantSearch searchClient={clientAlgolia} indexName="blog">
                         <Configure
-                            hitsPerPage={10}
+                            hitsPerPage={7}
                         />
                         <CustomSearchBox
                             placeholder={'Search'}
                         />
-                        {/* {showHit ? (<Hits hitComponent={Hit} />) : null} */}
-                        <Hits hitComponent={Hit} />
+                        <Results>
+                            <Hits hitComponent={Hit} />
+                        </Results>
                     </InstantSearch>
                 </div>
             </section>

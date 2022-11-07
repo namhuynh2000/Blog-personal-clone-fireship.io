@@ -1,9 +1,9 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useRef } from 'react';
-import { syncSanityToAlgolia } from '../utils/Sanity'
+import { syncSanityToAlgolia } from '../libs/library';
+
 
 export default function Home() {
   const blazinglyFast = useRef(0);
@@ -48,9 +48,6 @@ export async function getStaticProps() {
     description,
     slug
   }`
-
-  const query2 = `*[_type == "post"]{
-      title}`
 
   await syncSanityToAlgolia(query);
 
