@@ -6,7 +6,7 @@ export default function Layout({ children }) {
         <>
             <Navbar />
             {children}
-            <div className='mb-[30px]'></div>
+            {/* <div className='mb-[30px]'></div> */}
         </>
     )
 }

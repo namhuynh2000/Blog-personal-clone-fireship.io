@@ -27,7 +27,7 @@ const serializers = {
 
 
 
-export default function ID({ post }) {
+export default function Slug({ post }) {
     const { poster } = post;
     return (
         <>

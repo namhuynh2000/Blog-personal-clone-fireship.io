@@ -1,35 +1,29 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import { AiOutlineArrowUp } from 'react-icons/ai';
 
 
 export default function ScrollBtn() {
     const scrollBtn = useRef();
 
+    const scrollStatusFunc = useCallback(() => {
+        if (window.scrollY > 300) {
+            scrollBtn.current.classList.add('showScrollBtn');
+            scrollBtn.current.classList.remove('hideScrollBtn');
+        }
+        else {
+            if (scrollBtn.current.classList.contains('showScrollBtn')) {
+                scrollBtn.current.classList.remove('showScrollBtn');
+                scrollBtn.current.classList.add('hideScrollBtn');
+            }
+        }
+    }, [])
+
     useEffect(() => {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                scrollBtn.current.classList.add('showScrollBtn');
-                scrollBtn.current.classList.remove('hideScrollBtn');
-            }
-            else {
-                if (scrollBtn.current.classList.contains('showScrollBtn')) {
-                    scrollBtn.current.classList.remove('showScrollBtn');
-                    scrollBtn.current.classList.add('hideScrollBtn');
-                }
-            }
-        });
-        return () => window.removeEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                scrollBtn.current.classList.add('showScrollBtn');
-                scrollBtn.current.classList.remove('hideScrollBtn');
-            }
-            else {
-                if (scrollBtn.current.classList.contains('showScrollBtn')) {
-                    scrollBtn.current.classList.remove('showScrollBtn');
-                    scrollBtn.current.classList.add('hideScrollBtn');
-                }
-            }
-        });
+        window.addEventListener('scroll', scrollStatusFunc);
+        // return () => window.removeEventListener('scroll', scrollStatusFunc);
+        return () => {
+            window.removeEventListener('scroll', scrollStatusFunc);
+        }
     }, []);
 
 

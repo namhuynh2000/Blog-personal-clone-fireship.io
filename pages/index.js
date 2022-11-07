@@ -3,17 +3,16 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
-
-
+import { syncSanityToAlgolia } from '../utils/Sanity'
 
 export default function Home() {
   const blazinglyFast = useRef(0);
   const highlyAmusing = useRef(0);
   const [hoverBlazing, setHoverBlazing] = useState(false);
 
-  useEffect(() => {
+  // useEffect(async () => {
 
-  }, [])
+  // }, [])
 
   return (
     <>
@@ -33,12 +32,31 @@ export default function Home() {
             <Link href="/labs" className='text-white bg-[#22c55e] text-[14px] mx-auto font-[600] w-[130px] h-[36px] py-2 px-5'>START HERE</Link>
           </div>
           <div className="bg-[url('/tv.png')] bg-cover w-[500px] h-[300px] lg:col-span-1 col-span-2">
-            <iframe class="md:w-[330px] md:h-[185px] relative md:left-[48px] md:top-[54px] mx-auto md:mx-0 w-full aspect-video" src="https://player.vimeo.com/video/599890291" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+            <iframe className="md:w-[330px] md:h-[185px] relative md:left-[48px] md:top-[54px] mx-auto md:mx-0 w-full aspect-video" src="https://player.vimeo.com/video/599890291" frameBorder="0" webkitallowfullscreen="" mozallowfullscreen="" allowFullScreen=""></iframe>
           </div>
         </section>
       </main>
     </>
   )
+}
+
+export async function getStaticProps() {
+
+  const query = `*[_type == "post"]{
+    "objectID": _id,
+    title,
+    description,
+    slug
+  }`
+
+  const query2 = `*[_type == "post"]{
+      title}`
+
+  await syncSanityToAlgolia(query);
+
+  return {
+    props: {}
+  }
 }
 
 

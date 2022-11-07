@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
-import { IoMdSearch } from 'react-icons/io'
+import SearchBar from './SearchBar';
 
 export default function Navbar() {
     return (
@@ -15,7 +15,7 @@ export default function Navbar() {
                     <Link className='font-title text-green-500 md:px-2 px-1 py-0.5 border-green-400 sm:border rounded-md' href="/">PRO</Link>
                 </li>
                 <li className='hover:text-[#fff] hover:scale-105 ease-in duration-100'>
-                    <Link href={{ pathname: '/labs' }}>
+                    <Link href='/labs'>
                         labs
                     </Link>
                 </li>
@@ -24,16 +24,9 @@ export default function Navbar() {
                         courses
                     </Link>
                 </li>
-                <li className='md:hover:border-[#A855F7] hover:bg-opacity-20 md:bg-white md:bg-opacity-10 md:hover:border hover:drop-shadow-[0_0_7px_rgba(168,85,247,0.5)] border border-transparent md:border-[#929292] transition-all'>
-                    <div className="cursor-pointer relative boxSearch lg:w-[190px] lg:p-[8px] md:w-[150px]
-                    md:p-[6px] flex items-center ">
-                        <IoMdSearch className='mx-[5px] md:text-[25px]' fontSize={20} />
-                        <span className='text-[14px] font-[600] hidden md:inline-block'>Search</span>
-                        <span className='absolute hidden md:inline text-[10px] border-[#CED4D9] right-4 border py-[2px] px-2 rounded-[5px]'>/</span>
-                    </div>
-
+                <li>
+                    <SearchBar />
                 </li>
-                <li></li>
             </ul>
         </nav>
     )
