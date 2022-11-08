@@ -36,20 +36,20 @@ export default function Home() {
   )
 }
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
 
-  const query = `*[_type == "post"]{
-    "objectID": _id,
-    title,
-    description,
-    slug
-  }`
+//   const query = `*[_type == "post"]{
+//     "objectID": _id,
+//     title,
+//     description,
+//     slug
+//   }`
 
-  await syncSanityToAlgolia(query);
+//   await syncSanityToAlgolia(query);
 
-  return {
-    props: {}
-  }
-}
+//   return {
+//     props: {}
+//   }
+// }
 
 
