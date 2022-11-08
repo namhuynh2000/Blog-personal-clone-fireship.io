@@ -43,7 +43,7 @@ const configPortableText = {
         // Ex. 2: rendering custom list items
         checkmarks: ({ children }) => <li>✅ {children}</li>,
 
-        number: ({ children }) => <li style={{ listStyleType: 'upper-roman' }} >{children}</li>,
+        number: ({ children }) => <li>{children}</li>,
     },
 }
 
