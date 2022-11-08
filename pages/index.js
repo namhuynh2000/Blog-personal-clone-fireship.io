@@ -10,7 +10,6 @@ export default function Home() {
   const highlyAmusing = useRef(0);
   const [hoverBlazing, setHoverBlazing] = useState(false);
 
-
   return (
     <>
       <Head>
@@ -37,7 +36,7 @@ export default function Home() {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 
   const query = `*[_type == "post"]{
     "objectID": _id,
