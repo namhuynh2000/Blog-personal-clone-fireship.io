@@ -10,9 +10,6 @@ export default function Home() {
   const highlyAmusing = useRef(0);
   const [hoverBlazing, setHoverBlazing] = useState(false);
 
-  // useEffect(async () => {
-
-  // }, [])
 
   return (
     <>

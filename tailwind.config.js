@@ -12,18 +12,22 @@ module.exports = {
           css: {
             h1: {
               color: '#fff',
-            },
-            h2: {
-              color: '#fff',
               // borderStyle: 'border-dotted',
               borderBottom: '2px dashed white',
               display: 'inline-block',
               fontFamily: 'Lalezar, cursive',
-              fontSize: '32px'
+              fontSize: '35px',
+              marginTop: '30px',
+              marginBottom: '30px',
+            },
+            h2: {
+              marginTop: '12px',
+              marginBottom: '12px',
+              color: 'rgb(178 190 205)',
+              fontSize: '28px'
             },
             h3: {
-              color: 'rgb(178 190 205)',
-              fontSize: '25px'
+              color: '#fff',
             },
             h4: {
               color: '#fff',
@@ -39,16 +43,20 @@ module.exports = {
             },
             code: {
               color: '#fff',
-              fontFamily: 'VT323, monospace',
+              // fontFamily: 'VT323, monospace',
               backgroundColor: '#00000080',
               display: 'block',
               borderWidth: '2px',
               borderColor: 'rgb(42 46 53)',
-              padding: '10px'
+              padding: '20px',
+              marginTop: '20px',
+              marginBottom: '20px',
+              width: '80%'
             },
             blockquote: {
-              color: '#fff',
-              backgroundColor: 'rgb(42 46 53)'
+              color: '#D1D5DB',
+              backgroundColor: 'rgb(42 46 53)',
+              width: '80%'
             },
             strong: {
               color: '#fff',
@@ -60,7 +68,8 @@ module.exports = {
               color: '#3B82F6',
               textDecoration: 'none',
               '&:hover': {
-                color: '#FB923C'
+                color: '#FB923C',
+                cursor: 'pointer'
               },
             },
           },

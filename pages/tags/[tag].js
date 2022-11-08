@@ -5,7 +5,7 @@ import BlogCard from '../../components/BlogCard';
 
 
 export default function Tag({ tag }) {
-    // console.log(context)
+
     return (
         <>
             <Head>

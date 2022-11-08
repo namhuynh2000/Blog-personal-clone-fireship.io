@@ -1,30 +1,52 @@
 import React from 'react';
 import LayoutContent from '../../components/Layouts/LayoutContent';
-import BlockContent from '@sanity/block-content-to-react';
+import { PortableText } from '@portabletext/react';
 import getYouTubeId from 'get-youtube-id';
 import YouTube from 'react-youtube';
 import Image from 'next/image';
 import Link from 'next/link';
 import { urlFor, queryData } from '../../libs/library';
 import Head from 'next/head';
-import { clientSanityConfig } from '../../utils/Sanity'
 
-const serializers = {
+const configPortableText = {
+    block: {
+        // Customize block types with ease
+        h1: ({ children }) => {
+            return <h1 id={children[0]}>{children}</h1>
+        },
+        h2: ({ children }) => {
+            return <h2 id={children[0]}>{children}</h2>
+        },
+    },
     types: {
-        code: (props) => {
-            return (
-                <pre data-language={props.node.language}>
-                    <code>{props.node.code}</code>
-                </pre>
+        image: ({ value }) => {
+            return (<img alt={value.caption} src={urlFor(value).url()} loading="lazy" />
             )
         },
-        youtube: ({ node }) => {
-            const { url } = node;
+        youtube: ({ value }) => {
+            const { url } = value;
             const id = getYouTubeId(url);
-            return (<YouTube videoId={id} opts={{ height: 'auto' }} iframeClassName='w-full aspect-video' />)
+            return (<YouTube videoId={id} opts={{ height: 'auto' }} iframeClassName='w-[80%] aspect-video' />)
         }
     },
+    marks: {
+        code: ({ children }) => {
+            return <pre className='bg-[#00000080] border-[2px] border-[#2A2E35] py-5 px-10 w-[90%]'>
+                <code className='my-0'>{children}</code>
+            </pre>
+        }
+    },
+    listItem: {
+        // Ex. 1: customizing common list types
+        bullet: ({ children }) => <li style={{ listStyleType: 'square' }}>{children}</li>,
+
+        // Ex. 2: rendering custom list items
+        checkmarks: ({ children }) => <li>✅ {children}</li>,
+
+        number: ({ children }) => <li style={{ listStyleType: 'upper-roman' }} >{children}</li>,
+    },
 }
+
 
 export default function Slug({ post }) {
     const { poster } = post;
@@ -53,7 +75,7 @@ export default function Slug({ post }) {
                 }
                 <div className='flex lg:flex-row flex-col lg:items-center lg:justify-between px-3 pb-2 pt-4 mt-3 mb-5 rounded-lg bg-[#2A2E35] overflow-hidden'>
                     <div className='lg:min-w-[70%]'>
-                        <div className='font-title lg:text-[60px] sm:text-[55px] text-[40px] bg-clip-text bg-gradient-to-t from-[#f97316] to-[#eab308] text-transparent leading-none'>
+                        <div id='testTitle' className='font-title lg:text-[50px] sm:text-[40px] text-[30px] bg-clip-text bg-gradient-to-t from-[#f97316] to-[#eab308] text-transparent leading-none'>
                             {post.title}
                         </div>
                         <div className='text-[#6c7983] sm:text-[12px] text-[10px]'>
@@ -76,14 +98,12 @@ export default function Slug({ post }) {
                         </Link>
                     </div>
                 </div>
-                <article className="prose">
-                    <BlockContent
-                        blocks={post.text}
-                        serializers={serializers}
-                        imageOptions={{ w: 800, fit: 'max' }}
-                        projectId={clientSanityConfig.projectId}
-                        dataset={clientSanityConfig.dataset}
-                        className="text-white" />
+                <article className="prose max-w-none">
+                    <PortableText
+                        value={post.text}
+                        components={configPortableText}
+                    // className="text-white"
+                    />
                 </article>
             </LayoutContent>
         </>
