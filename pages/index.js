@@ -36,7 +36,7 @@ export default function Home() {
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 
   const query = `*[_type == "post"]{
     "objectID": _id,
