@@ -3,7 +3,7 @@ import { indexAlgolia } from '../utils/Algolia';
 import { clientSanity } from '../utils/Sanity';
 
 // Variables
-export const postPerPage = 20;
+export const postPerPage = 5;
 const builder = imageUrlBuilder(clientSanity);
 
 // Function
