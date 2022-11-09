@@ -8,7 +8,7 @@ export default function LayoutContent({ post, children }) {
                 <div className="wrapperChild md:col-span-3 col-span-4">
                     {children}
                 </div>
-                <Sidebar post={post} className='relative' />
+                <Sidebar post={post} className='relative md:col-span-1 md:block hidden' />
             </main>
         </>
     )

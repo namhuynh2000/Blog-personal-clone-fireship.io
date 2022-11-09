@@ -1,12 +1,12 @@
 import React from 'react'
 
-export default function Sidebar({ post }) {
+export default function Sidebar({ post, className }) {
     const { text } = post;
     const listTitle = text?.filter(item => {
         return (item.style == 'h1' || item.style == 'h2');
     })
     return (
-        <div className='relative'>
+        <div className={className}>
             <div className='pl-8 sticky top-5'>
                 {listTitle?.map(title => {
                     return title.style == 'h1' ?
