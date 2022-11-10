@@ -22,7 +22,7 @@ export default function Home() {
         <section className='grid grid-cols-2 justify-items-center items-center'>
           <div className='p-[24px] text-center flex flex-col lg:col-span-1 col-span-2'>
             <h1 className='leading-none font-title font-[900] text-[60px]'>LEARN TO CODE <span className='bg-gradient-to-t from-[#f97316] to-[#eab308] bg-clip-text text-transparent'>FASTER.</span></h1>
-            <p className='md:text-[25px] text-[20px] font-code font-[500] text-[#b2becd] my-7 relative'>Fireship is a <span className='text-[#eab308]' ref={blazinglyFast} onMouseOver={() => { console.log(blazinglyFast.current) }}>
+            <p className='md:text-[25px] text-[20px] font-code font-[500] text-[#b2becd] my-7 relative'>Fireship is a <span className='text-[#eab308]' ref={blazinglyFast}>
               {/* <Image className='absolute top-[-10px]' src='/cat.gif' width={75} height={75} /> */}
               blazingly fast</span> && <span className='text-[#ec4899]' ref={highlyAmusing}>highly-amusing</span> way to level up your programming skills.</p>
             <Link href="/labs" className='text-white bg-[#22c55e] text-[14px] mx-auto font-[600] w-[130px] h-[36px] py-2 px-5'>START HERE</Link>
